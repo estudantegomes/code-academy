@@ -1,6 +1,6 @@
 services:
   web:
     build: .
-    container_name: desafio-1
+    image: desafio-1
     ports:
       - "8080:80"
