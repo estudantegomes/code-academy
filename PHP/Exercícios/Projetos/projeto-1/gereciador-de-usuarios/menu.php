@@ -2,13 +2,14 @@
 include_once "funções/buscaIndicePorId.php";
 include_once "funções/buscarUsuario.php";
 include_once "funções/cadastrarUsuario.php";
-include_once "funções/confirmaEntrada.php";
+include_once "funções/confirmarEntrada.php";
 include_once "funções/editarUsuario.php";
 include_once "funções/estatisticas.php";
 include_once "funções/exibirUsuario.php";
 include_once "funções/listarUsuario.php";
 include_once "funções/ordenarUsuarios.php";
 include_once "funções/removerUsuario.php";
+include_once "funções/verificarSenha.php";
 
 $usuarios = [];
 
@@ -151,6 +152,13 @@ while ($continua) {
                 //senha
                 case 3:
                     i("Você selecionou editar a senha!");
+                    if (!verificarSenha($usuarios[$indice]["Senha"])) {
+                        i("Senha incorreta.");
+                        pausar();
+                        break;
+                    }
+
+                    i("Validação concluída!");
                     $novaSenha = confirmarEntrada("Digite a nova senha:");
 
                     editarUsuario($usuarios, $indice, Chave::senha, $novaSenha);
