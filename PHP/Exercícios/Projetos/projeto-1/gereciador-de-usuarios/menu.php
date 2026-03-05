@@ -44,7 +44,7 @@ $continua = true;
 while ($continua) {
     system('clear');
     listarMenu();
-    
+
     i("Escolha uma opção: ");
     $opcao = (int)fgets(STDIN);
 
@@ -136,7 +136,7 @@ while ($continua) {
                 //e-mail
                 case 2:
                     i("Você selecionou editar o e-mail!");
-                    $novoEmail = confirmarEntrada("Digite o e-mail:");
+                    $novoEmail = confirmarEntrada("Digite o novo e-mail:");
 
                     editarUsuario($usuarios, $indice, Chave::email, $novoEmail);
 
@@ -151,7 +151,7 @@ while ($continua) {
                 //senha
                 case 3:
                     i("Você selecionou editar a senha!");
-                    $novaSenha = confirmarEntrada("Digite a senha:");
+                    $novaSenha = confirmarEntrada("Digite a nova senha:");
 
                     editarUsuario($usuarios, $indice, Chave::senha, $novaSenha);
 
