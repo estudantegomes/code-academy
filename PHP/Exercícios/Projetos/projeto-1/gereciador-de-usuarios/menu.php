@@ -2,6 +2,7 @@
 include_once "funções/buscaIndicePorId.php";
 include_once "funções/buscarUsuario.php";
 include_once "funções/cadastrarUsuario.php";
+include_once "funções/confirmaEntrada.php";
 include_once "funções/editarUsuario.php";
 include_once "funções/estatisticas.php";
 include_once "funções/exibirUsuario.php";
@@ -43,8 +44,8 @@ $continua = true;
 while ($continua) {
     system('clear');
     listarMenu();
+    
     i("Escolha uma opção: ");
-
     $opcao = (int)fgets(STDIN);
 
     switch ($opcao) {
@@ -54,13 +55,11 @@ while ($continua) {
             i("Você escolheu cadastrar!");
 
             i("Digite o nome:");
-            $novoNome = trim((string)fgets(STDIN));
+            $novoNome = trim(fgets(STDIN));
 
-            i("Digite o e-mail:");
-            $novoEmail = trim((string)fgets(STDIN));
+            $novoEmail = confirmarEntrada("Digite o e-mail:");
 
-            i("Digite a senha:");
-            $novaSenha = trim((string)fgets(STDIN));
+            $novaSenha = confirmarEntrada("Digite a senha:");
 
             i("Usuário administrador? (s/n)");
             $entrada = strtolower(trim(fgets(STDIN)));
@@ -137,13 +136,13 @@ while ($continua) {
                 //e-mail
                 case 2:
                     i("Você selecionou editar o e-mail!");
-                    i("Digite o e-mail: ");
+                    $novoEmail = confirmarEntrada("Digite o e-mail:");
 
-                    $novoEmail = trim((string)fgets(STDIN));
                     editarUsuario($usuarios, $indice, Chave::email, $novoEmail);
 
                     system('clear');
                     i("E-mail atualizado: ");
+
                     $indice = buscarIndicePorId($usuarios, $entrada);
                     exibirUsuario($usuarios[$indice]);
                     pausar();
@@ -152,13 +151,13 @@ while ($continua) {
                 //senha
                 case 3:
                     i("Você selecionou editar a senha!");
-                    i("Digite a senha: ");
+                    $novaSenha = confirmarEntrada("Digite a senha:");
 
-                    $novaSenha = trim((string)fgets(STDIN));
                     editarUsuario($usuarios, $indice, Chave::senha, $novaSenha);
 
                     system('clear');
                     i("Senha atualizada: ");
+
                     $indice = buscarIndicePorId($usuarios, $entrada);
                     exibirUsuario($usuarios[$indice]);
                     pausar();

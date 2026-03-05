@@ -19,5 +19,3 @@ function buscarUsuario(array $usuarios, string $termo): array
 
     return $resultado;
 }
-
-?>
