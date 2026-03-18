@@ -5,11 +5,6 @@ spl_autoload_register(function ($classe) {
     require_once dirname(__DIR__) . "/classes/" . strtolower($classe) . ".php";
 });
 
-/**
- * =========================
- * BARRA DE VIDA
- * =========================
- */
 function barraDeVida(int $vidaAtual, int $vidaMaxima, int $tamanho = 16): string
 {
     $percentual = $vidaMaxima > 0 ? $vidaAtual / $vidaMaxima : 0;
@@ -21,11 +16,6 @@ function barraDeVida(int $vidaAtual, int $vidaMaxima, int $tamanho = 16): string
     return "[{$cheio}{$vazio}] {$vidaAtual}/{$vidaMaxima}";
 }
 
-/**
- * =========================
- * EXIBIÇÃO INDIVIDUAL
- * =========================
- */
 function exibirPersonagem(Personagem $p, int $numero): void
 {
     echo "----------------------------------------\n";
@@ -38,11 +28,6 @@ function exibirPersonagem(Personagem $p, int $numero): void
     echo "Energia: " . $p->getPontosDeEnergia() . "\n";
 }
 
-/**
- * =========================
- * STATUS GERAL
- * =========================
- */
 function exibirStatus(Personagem $p1, Personagem $p2, int $turno, int $playerAtual): void
 {
     echo "========================================\n";
@@ -58,11 +43,6 @@ function exibirStatus(Personagem $p1, Personagem $p2, int $turno, int $playerAtu
     echo "========================================\n";
 }
 
-/**
- * =========================
- * COMBATE
- * =========================
- */
 function iniciarCombate(Personagem $player1, Personagem $player2): void
 {
     $player = true;
@@ -74,7 +54,6 @@ function iniciarCombate(Personagem $player1, Personagem $player2): void
         $oponente       = $player ? $player2 : $player1;
         $numeroDoPlayer = $player ? 1 : 2;
 
-        // ✔ processa efeitos apenas do jogador atual
         $atacante->processarEfeitos();
 
         system('clear');
@@ -122,7 +101,6 @@ function iniciarCombate(Personagem $player1, Personagem $player2): void
                 echo "\nOpção inválida! Turno perdido.\n";
         }
 
-        // ✔ energia carrega no final
         $atacante->carregarEspecial();
 
         pausar();
