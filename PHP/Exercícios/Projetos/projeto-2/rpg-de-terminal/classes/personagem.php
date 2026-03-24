@@ -32,13 +32,11 @@ abstract class Personagem
         $this->efeitos        = [];
     }
 
-    // ================= ABSTRACT =================
-
     abstract public function especial(Personagem $oponente): void;
     abstract public function descricao(): string;
     abstract public function carregarEspecial(): void;
 
-    // ================= AÇÕES =================
+    //AÇÕES
 
     public function atacar(Personagem $oponente): void
     {
@@ -77,7 +75,6 @@ abstract class Personagem
     {
         foreach ($this->efeitos as $indice => &$efeito) {
 
-            // ================= APLICAÇÃO (UMA VEZ) =================
             if (!$efeito['aplicado']) {
 
                 match ($efeito['tipo']) {
@@ -91,7 +88,6 @@ abstract class Personagem
                 $efeito['aplicado'] = true;
             }
 
-            // ================= EFEITOS POR TURNO =================
             match ($efeito['tipo']) {
                 Efeito::Regeneracao  => $this->setPontosDeVida(
                     $this->getPontosDeVida() + $efeito['valor']
@@ -102,12 +98,9 @@ abstract class Personagem
                 default => null
             };
 
-            // ================= CONTAGEM =================
             $efeito['turnos']--;
 
             if ($efeito['turnos'] <= 0) {
-
-                // 🔥 REMOÇÃO CORRETA (invertendo efeito)
 
                 if ($efeito['tipo'] === Efeito::BuffAtaque) {
                     $this->ataqueExtra -= $efeito['valor'];
@@ -129,11 +122,10 @@ abstract class Personagem
             }
         }
 
-        // 🔒 evita bug de referência
         unset($efeito);
     }
 
-    // ================= GETTERS =================
+    //GETTERS
 
     public function getNome(): string { return $this->nome; }
 
@@ -161,7 +153,7 @@ abstract class Personagem
 
     public function getPontosDeEnergia(): int { return $this->pontosDeEnergia; }
 
-    // ================= SETTERS =================
+    //SETTERS
 
     public function setNome(string $nome): void
     {
